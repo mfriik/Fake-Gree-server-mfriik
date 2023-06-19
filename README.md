@@ -16,11 +16,11 @@ There are some things you need to have working before you can use this hack solu
 * For the registration / activation process you'll need a WiFi and Python3 capable device _(laptop or possibly some phones)_
 
 # Setting it all up
-1. Run it in Linux with `sudo python3 -u gree_server.py $IP(of the server) $PORT(1812) $HOSTNAME(dis.gree.com)`
-2. Turn off the HVAC unit and reset the WiFi settings _(MODE + WIFI usually)_
-3. Wait ~ 2 minutes and once the HVAC unit's WiFi comes online, connect to it from a laptop or some other device! (SSID will be the last few bytes of its MAC address, the password is `12345678`)
-4. Run `python3 register.py YOUR_WIFI'S_SSID YOUR_WIFI'S_PASSWORD`
-5. In a few seconds the fake server should be receiving all sorts of connections and everything will be working.
+1. Run it in Linux with `sudo python3 -u gree_server.py $IP $PORT $HOSTNAME` (eg. `sudo python3 -u gree_server.py 192.168.0.10 1812 dis.gree.com`
+3. Turn off the HVAC unit and reset the WiFi settings _(MODE button + WIFI button usually)_
+4. Wait ~ 2 minutes and once the HVAC unit's WiFi comes online, connect to it from a laptop or some other device! (SSID will be the last few bytes of its MAC address, the password is `12345678`)
+5. Run `python3 register.py YOUR_WIFI'S_SSID YOUR_WIFI'S_PASSWORD`
+6. In a few seconds the fake server should be receiving all sorts of connections and everything will be working.
 
 # Limitations
 * I don't think the usualy Gree applications work like this, at all. They don't really, for me, at least. **Homeassistant** is an amazing project and it works flawlessly, however! _(Including the automatic discovery and all!)_ Check it out, so much better than the stock apps anyway [with zero homecalls :)]  Thanks to RobHofmann's https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent )_ 
