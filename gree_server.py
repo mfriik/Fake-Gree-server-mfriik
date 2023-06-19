@@ -21,7 +21,8 @@ class GreeSrv:
         self.serve()
 
     def instruct(self):
-       print('******************************************************')
+       ct = datetime.datetime.now()
+       print('********************************')
        print('If this is a first run then follow this procedure: ')
        print('1. Turn off the HVAC unit                          ')
        print('2. Override the \'dis.gree.com\' DNS A record via your DNS server to point to {}'.format(self.ip))
@@ -39,7 +40,8 @@ class GreeSrv:
     def serve(self):
         self.srv.bind((self.ip, self.port))
         self.srv.listen()
-        print('* Server is running on (tcp) {}:{}, DNS A record: {}'.format(self.ip, self.port, self.hostname))
+        ct = datetime.datetime.now()
+        print((str(ct)) + ' - ' + '* Server is running on (tcp) {}:{}, DNS A record: {}'.format(self.ip, self.port, self.hostname))
 
         while True:
             conn, address = self.srv.accept()
@@ -89,7 +91,8 @@ class GreeSrv:
 
         @finalize
         def cmd_dis(self, msg):
-            print('    Discovery request')
+            ct = datetime.datetime.now()
+            print((str(ct)) + ' - ' + 'Discovery request')
             pack = {'t': 'svr',
                       'ip': self.ip,
                       'ip2': self.ip,
@@ -112,7 +115,8 @@ class GreeSrv:
 
         @finalize
         def cmd_devLogin(self, msg):
-            print('    DevLogin request')
+            ct = datetime.datetime.now()
+            print(str(ct) + ' - ' + 'DevLogin request')
             norm_arr = [8, 9, 14, 15, 2, 3, 10, 11, 4, 5, 0, 1]
             cid = ''.join([msg['mac'][c] for c in norm_arr])
 
@@ -132,7 +136,8 @@ class GreeSrv:
 
         @finalize
         def cmd_tm(self):
-            print('    Tm request')
+            ct = datetime.datetime.now()
+            print((str(ct)) + ' - ' + 'Tm request')
             time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             answer = {'t': 'tm',
                       'time': time}
@@ -140,19 +145,22 @@ class GreeSrv:
 
         @finalize
         def cmd_hb(self):
-            print('    Hb request')
+            ct = datetime.datetime.now()
+            print((str(ct)) + ' - ' + 'Hb request')
             answer = {'t': 'hbok'}
             return True, answer
 
         def cmd_pack(self, msg):
-            print('    Pack request, recursing')
+            ct = datetime.datetime.now()
+            print((str(ct)) + ' - ' + 'Pack request, recursing')
             msg = self.decrypt(msg['pack'])
             return self.process(msg)
 
         def process(self, msg):
             try:
                 msg = json.loads(msg)
-                print('  Received: {}'.format(msg))
+                ct = datetime.datetime.now()
+                print((str(ct)) + ' - ' + 'Received: {}'.format(msg))
                 cmd = msg['t']
                 if cmd == 'dis':
                     return self.cmd_dis(msg)
@@ -167,7 +175,8 @@ class GreeSrv:
                 return False, b''
 
             except Exception as E:
-                    print('* Exception: {} on message {}'.format(str(E), str(msg)))
+                    ct = datetime.datetime.now()
+                    print((str(ct)) + ' - ' + '* Exception: {} on message {}'.format(str(E), str(msg)))
                     return False, b''
 
 
