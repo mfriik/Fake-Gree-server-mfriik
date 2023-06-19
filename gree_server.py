@@ -2,7 +2,7 @@ import base64
 import json
 import socket
 import sys
-from datetime import datetime
+import datetime
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
@@ -23,6 +23,7 @@ class GreeSrv:
     def instruct(self):
        ct = datetime.datetime.now()
        print('********************************')
+       print(str(ct))
        print('If this is a first run then follow this procedure: ')
        print('1. Turn off the HVAC unit                          ')
        print('2. Override the \'dis.gree.com\' DNS A record via your DNS server to point to {}'.format(self.ip))
