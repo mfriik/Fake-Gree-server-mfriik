@@ -10,8 +10,8 @@ You reset your unit's WiFi, you register following the registration procedure de
 
 # Prerequisites
 There are some things you need to have working before you can use this hack solution:
-* A DNS server serving (at least) the (separate?) network onto which the HVAC unit will be connected to
-* A DNS override of `dis.gree.com` to the IP address of this fake server _(implicated reserving a static ip for the server)_
+* A DNS server serving the network onto which the HVAC unit will be connected to or a Pi-Hole
+* A DNS override of `dis.gree.com` to the IP address of this fake server _(implicated reserving a static ip for the server)_. For Pi-Hole use Local DNS option for `dis.gree.com` to `IP of fake server`
 * You could additionally block all other connections sourcing from the HVAC unit except for DNS requests towards your DNS server and TCP/1812 towards this fake server
 * For the registration / activation process you'll need a WiFi and Python3 capable device _(laptop or possibly some phones)_
 
@@ -23,10 +23,9 @@ There are some things you need to have working before you can use this hack solu
 6. In a few seconds the fake server should be receiving all sorts of connections and everything will be working.
 
 # Limitations
-* I don't think the usualy Gree applications work like this, at all. They don't really, for me, at least. **Homeassistant** is an amazing project and it works flawlessly, however! _(Including the automatic discovery and all!)_ Check it out, so much better than the stock apps anyway [with zero homecalls :)]  Thanks to RobHofmann's https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent )_ 
+* **Homeassistant** is an amazing project and it works flawlessly, however! _(Including the automatic discovery and all!)_ Check it out, so much better than the stock apps anyway [with zero homecalls :)]  Thanks to RobHofmann's https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent )_ 
 * Nothing else really. After setting all up I tried shutting down the fake server for a few hours and then firing it back up. The HVAC unit tolerated it nicely, nothing stopped working. I can imagine having the fake server not running for a very long time could cause the HVAC unit to lose its s#*t and start the discovery process again but that would work just fine too since the DNS for the discovery server _(dis.gree.com)_ is overriden :)
 * Absolutely worst case you need to do the registration procedure again. It takes < 1 min. and I never had to do it again, save for the testing. _(In HomeAssistant after re-registrations you may need to reload the Gree module - no need to restart HomeAssistant!)_
 
 # Saying thanks..
-* .. to tomikaa87 for his project gree-remote: https://github.com/tomikaa87/gree-remote
-* .. to emtek-at for their project GreeAC-DummyServer: https://github.com/emtek-at/GreeAC-DummyServer
+* .. to markv9401 for their project Fake-Gree-server: https://github.com/markv9401/Fake-Gree-server as this repo is their code with minor tweaks for my own use and preference
