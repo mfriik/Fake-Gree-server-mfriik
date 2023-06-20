@@ -134,7 +134,7 @@ class GreeSrv:
         @finalize
         def cmd_tm(self):
             print(str(datetime.datetime.now()) + ' - ' + 'Tm request')
-            time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             answer = {'t': 'tm',
                       'time': time}
             return True, answer
